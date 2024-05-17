@@ -1,37 +1,41 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Tabs } from "expo-router";
+import React from "react";
+import { FontAwesome, AntDesign } from "@expo/vector-icons";
+import { StatusBar } from "react-native";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
+    <>
+      <StatusBar backgroundColor="black" barStyle="light-content" />
+
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveTintColor: "#FA7070",
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="home"
+          options={{
+            title: "Home",
+            tabBarLabelStyle: { fontSize: 13 },
+            tabBarIcon: ({ color }) => (
+              <FontAwesome name="home" size={24} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="favorite"
+          options={{
+            title: "Favorite",
+
+            tabBarLabelStyle: { fontSize: 13 },
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="heart" size={20} color={color} />
+            ),
+          }}
+        />
+      </Tabs>
+    </>
   );
 }
